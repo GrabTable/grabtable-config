@@ -5,8 +5,7 @@ namespace: grabtable
 resources:
 - namespace.yaml
 - secret.yaml
-bases:
-  - ../../../base/be
+- ../../../base/be
 
 
 patches:
@@ -16,4 +15,4 @@ patches:
     name: grabtable-be-ingress
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-be
-  newTag: de5d5d89f7714b2c58e51be582d39366925f1e44
+  newTag: d301b024881fd30ddd2dcf4aca8e148dd4b99a63
