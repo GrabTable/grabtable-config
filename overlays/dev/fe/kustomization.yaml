@@ -3,19 +3,19 @@ kind: Kustomization
 namespace: grabtable
 resources:
 - namespace.yaml
-# secret.yaml
+- secret.yaml
 
 bases:
 - ../../../base/fe
-# patches:
-#   - path: ingress.yaml
-#     target: 
-#       kind: Ingress
-#       name: grabtable-fe-ingress
-#   - path: delployment.yaml
-#     target:
-#       kind: Deployment
-#       name: grabtable-fe-deployment
+patches:
+  - path: domain.json
+    target: 
+      kind: Ingress
+      name: grabtable-fe-ingress
+  - path: deployement.json
+    target:
+      kind: Deployment
+      name: grabtable-fe-deployment
 
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-fe

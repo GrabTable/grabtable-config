@@ -1,0 +1,7 @@
+[
+    {
+        "op" : "replace",
+        "path": "/spec/template/spec/containers/0/image",
+        "value": "harbor.k8s.scg.skku.ac.kr/library/grabtable-fe"
+    }
+]
