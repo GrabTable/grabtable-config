@@ -17,7 +17,7 @@ spec:
         - image: mysql:8.3.0
           name: mysql-dev
           envFrom:
-            - secretKeyRef:
+            - secretRef:
                 name: mysql-secret
                 key: MYSQL_ROOT_PASSWORD
           ports:
