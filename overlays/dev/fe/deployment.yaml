@@ -20,4 +20,4 @@ spec:
             - containerPort: 3000
           envFrom:
             - secretRef:
-                name: grabtable-secret
+                name: grabtable-fe-secret
