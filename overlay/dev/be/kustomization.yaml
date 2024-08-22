@@ -15,5 +15,5 @@ patches:
     kind: Ingress
     name: grabtable-be-ingress
 images:
-- name: jcy0308/grabtable-be
+- name: harbor.k8s.scg.skku.ac.kr/library/grabtable-be
   newTag: latest
