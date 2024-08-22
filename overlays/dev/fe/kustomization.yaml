@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: grabtable
 patchesStrategicMerge:
 - ingress.yaml
-
+- secret.yaml
 resources:
 - ../../../base/fe
 images:
