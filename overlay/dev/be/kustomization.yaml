@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: grabtable
+
+resources:
+- namespace.yaml
+- secret.yaml
+bases:
+  - ./../../base/be
+
+
+patches:
+- path: domain.json
+  target:
+    kind: Ingress
+    name: grabtable-be-ingress
+images:
+- name: jcy0308/grabtable-be
+  newTag: latest

@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-dev
+spec:
+  selector:
+    matchLabels:
+      app: mysql-dev
+  serviceName: mysql-dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql-dev
+    spec:
+      containers:
+        - image: mysql:8.3.0
+          name: mysql-dev
+          envFrom:
+            - secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_ROOT_PASSWORD
+          ports:
+            - containerPort: 3306
+              name: mysql-dev
+          resources:
+              requests:
+                 cpu: "1"
+                 memory: "4Gi"
+              limits:
+                 cpu: "2"
+                 memory: "8Gi"
+          # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-tcp-liveness-probe
+          readinessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 6
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+            - name: mysql-init
+              mountPath: /init-script.d
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-volumeclaim
+        - name: mysql-init
+          configmap:
+            name: mysql-init-script
+---
+## config for service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-dev
+  labels:
+    app: mysql-dev
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3306
+  selector:
+    app: mysql-dev
+---
+## config pvc
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mysql-volumeclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 55Gi
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+data:
+  init-db.sh: |
+    #!/bin/bash
+    MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    DB_NAME="grabtable"
+
+    echo "Checking if database $DB_NAME exists..."
+    RESULT=$(mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "SHOW DATABASES LIKE '${DB_NAME}';")
+
+    if [ -z "$RESULT" ]; then
+      echo "Database $DB_NAME does not exist. Creating..."
+      mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE ${DB_NAME};"
+    else
+      echo "Database $DB_NAME already exists."
+    fi
+
+---

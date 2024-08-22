@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grabtable-be-deployment
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: grabtable-be
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: grabtable-be
+    spec:
+      containers:
+      - image: jcy0308/grabtable-be
+        imagePullPolicy: Always
+        name: grabtable-be
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - secretRef:
+            name: grabtable-secret
+        resource: 
+          requests:
+            cpu: 2
+            memory: 2Gi
+          limits:
+            memory: 4Gi
+        readinessProbe:
+          failureThreshold: 3
+          successThreshold: 1
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          failureThreshold: 3
+          successThreshold: 1
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 5
