@@ -8,4 +8,4 @@ resources:
 - ../../../base/fe
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-fe
-  newTag: latest
+  newTag: 45ea65b6e9e1968195a1aafe1bf05cfdd515ce68
