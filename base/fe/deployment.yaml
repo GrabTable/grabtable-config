@@ -13,7 +13,7 @@ spec:
         app.kubernetes.io/name: grabtable-fe
     spec:
       containers:
-        - image: harbor.k8s.scg.skku.ac.kr/library/nginx
+        - image: harbor.k8s.scg.skku.ac.kr/library/grabtable-fe
           imagePullPolicy: Always
           name: grabtable-fe
           ports:
