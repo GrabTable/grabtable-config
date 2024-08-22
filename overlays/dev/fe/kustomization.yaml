@@ -4,6 +4,7 @@ namespace: grabtable
 patchesStrategicMerge:
 - ingress.yaml
 - secret.yaml
+- deployment.yaml
 resources:
 - ../../../base/fe
 images:
