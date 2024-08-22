@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: grabtable
 resources:
 - namespace.yaml
-- secret.yaml
+# secret.yaml
 
 bases:
 - ../../../base/fe
