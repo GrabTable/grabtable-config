@@ -16,4 +16,4 @@ patches:
     name: grabtable-be-ingress
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-be
-  newTag: a1c1817263af40167415b0aba61faab4e33adae8
+  newTag: de5d5d89f7714b2c58e51be582d39366925f1e44
