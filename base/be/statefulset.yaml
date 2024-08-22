@@ -18,7 +18,7 @@ spec:
           name: mysql-dev
           envFrom:
             - secretRef:
-                name: mysql-secret
+                name: grabtable-secret
                 key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
