@@ -8,8 +8,15 @@ resources:
 bases:
 - ../../../base/fe
 patches:
-  - ingress.yaml
-  - deployment.yaml
+  - path: ingress.yaml
+    target: 
+      kind: Ingress
+      name: grabtable-fe-ingress
+  - path: delployment.yaml
+    target:
+      kind: Deployment
+      name: grabtable-fe-deployment
+
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-fe
   newTag: 45ea65b6e9e1968195a1aafe1bf05cfdd515ce68
