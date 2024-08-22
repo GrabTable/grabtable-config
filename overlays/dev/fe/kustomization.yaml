@@ -12,7 +12,7 @@ patches:
     target: 
       kind: Ingress
       name: grabtable-fe-ingress
-  - path: deployement.json
+  - path: deployment.json
     target:
       kind: Deployment
       name: grabtable-fe-deployment
