@@ -13,7 +13,7 @@ spec:
         app.kubernetes.io/name: grabtable-be
     spec:
       containers:
-      - image: jcy0308/grabtable-be
+      - image: harbor.k8s.scg.skku.ac.kr/library/grabtable-be
         imagePullPolicy: Always
         name: grabtable-be
         ports:
