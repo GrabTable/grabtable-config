@@ -7,12 +7,6 @@ resources:
 - secret.yaml
 - ../../../base/be
 
-
-patches:
-- path: domain.json
-  target:
-    kind: Ingress
-    name: grabtable-be-ingress
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-be
   newTag: local2
