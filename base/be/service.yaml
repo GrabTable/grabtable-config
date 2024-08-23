@@ -8,4 +8,4 @@ spec:
       targetPort: 8000
       protocol: TCP
   selector:
-    app.kubernetes.io/name: grabtable-be-deployment
+    app.kubernetes.io/name: grabtable-be
