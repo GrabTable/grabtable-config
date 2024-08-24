@@ -17,4 +17,4 @@ patches:
 
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-fe
-  newTag: cdf314d95f36525ec0cc39347c1d20f090eaaf58
+  newTag: latest
