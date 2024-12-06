@@ -9,4 +9,4 @@ resources:
 
 images:
 - name: harbor.k8s.scg.skku.ac.kr/library/grabtable-be
-  newTag: local3
+  newTag: 3c9d9aabad69e7c0bfa105a49702baa041479d33
